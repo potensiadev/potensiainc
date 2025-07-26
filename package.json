@@ -1,4 +1,3 @@
-// package.json (React 예시)
 {
   "scripts": {
     "build": "react-scripts build",
