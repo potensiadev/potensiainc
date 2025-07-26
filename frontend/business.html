@@ -1,601 +1,370 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronDown, ArrowRight, Code, Smartphone, BarChart3, BookOpen, Menu, X, Database, Cloud, Brain, Zap, Globe, Users, TrendingUp, PlayCircle, CheckCircle, Star } from 'lucide-react';
-
-const PotensiaBusinessPage = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState(0);
-  const [hoveredService, setHoveredService] = useState(null);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const businessCategories = [
-    {
-      id: 0,
-      icon: <Code className="w-8 h-8" />,
-      title: "Software & AI Solutions",
-      subtitle: "첨단 기술 솔루션",
-      description: "AI와 소프트웨어 기술로 미래를 선도합니다",
-      gradient: "from-blue-500 to-cyan-500",
-      bgGradient: "from-blue-50 to-cyan-50",
-      services: [
-        {
-          title: "소프트웨어 개발 및 공급",
-          description: "맞춤형 소프트웨어 솔루션 개발부터 공급까지 원스톱 서비스",
-          features: ["웹/앱 개발", "시스템 통합", "API 개발", "클라우드 마이그레이션"],
-          icon: <Code className="w-6 h-6" />
-        },
-        {
-          title: "인공지능 활용 소프트웨어 개발업",
-          description: "AI 기술을 접목한 혁신적인 소프트웨어 솔루션 제공",
-          features: ["머신러닝 모델", "자연어 처리", "컴퓨터 비전", "예측 분석"],
-          icon: <Brain className="w-6 h-6" />
-        },
-        {
-          title: "정보기술 및 컴퓨터 관련 서비스",
-          description: "IT 인프라부터 기술 컨설팅까지 종합 IT 서비스",
-          features: ["IT 컨설팅", "시스템 관리", "보안 서비스", "기술 지원"],
-          icon: <Cloud className="w-6 h-6" />
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business - Potensia Inc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fadeIn': 'fadeIn 1s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    }
+                }
+            }
         }
-      ]
-    },
-    {
-      id: 1,
-      icon: <Smartphone className="w-8 h-8" />,
-      title: "Digital Marketing & E-commerce",
-      subtitle: "디지털 마케팅 전문",
-      description: "온라인 비즈니스 성장을 위한 통합 솔루션",
-      gradient: "from-purple-500 to-pink-500",
-      bgGradient: "from-purple-50 to-pink-50",
-      services: [
-        {
-          title: "온라인 광고 대행 및 마케팅 서비스",
-          description: "데이터 기반의 효과적인 디지털 마케팅 전략 수립 및 실행",
-          features: ["구글/페이스북 광고", "SEO 최적화", "콘텐츠 마케팅", "성과 분석"],
-          icon: <TrendingUp className="w-6 h-6" />
-        },
-        {
-          title: "전자상거래 및 통신판매업",
-          description: "온라인 쇼핑몰 구축부터 운영까지 전 과정 지원",
-          features: ["쇼핑몰 구축", "결제 시스템", "재고 관리", "물류 연동"],
-          icon: <Smartphone className="w-6 h-6" />
-        },
-        {
-          title: "온라인홍보대행업",
-          description: "브랜드 인지도 향상을 위한 종합 온라인 홍보 서비스",
-          features: ["SNS 마케팅", "인플루언서 협업", "바이럴 마케팅", "브랜드 전략"],
-          icon: <Globe className="w-6 h-6" />
-        }
-      ]
-    },
-    {
-      id: 2,
-      icon: <BarChart3 className="w-8 h-8" />,
-      title: "Consulting & Data Services",
-      subtitle: "전문 컨설팅",
-      description: "데이터 기반의 전략적 비즈니스 컨설팅",
-      gradient: "from-emerald-500 to-teal-500",
-      bgGradient: "from-emerald-50 to-teal-50",
-      services: [
-        {
-          title: "경영 컨설팅 및 자문",
-          description: "기업의 성장과 혁신을 위한 전략적 경영 컨설팅 서비스",
-          features: ["전략 수립", "조직 개선", "프로세스 최적화", "성과 관리"],
-          icon: <Users className="w-6 h-6" />
-        },
-        {
-          title: "데이터베이스 및 온라인 정보 제공",
-          description: "빅데이터 구축 및 분석을 통한 인사이트 제공",
-          features: ["DB 설계", "데이터 분석", "리포트 생성", "실시간 모니터링"],
-          icon: <Database className="w-6 h-6" />
-        },
-        {
-          title: "자료 처리 및 관리 서비스",
-          description: "효율적인 데이터 처리 및 관리 시스템 구축",
-          features: ["데이터 수집", "정제 및 가공", "저장 관리", "백업 시스템"],
-          icon: <BarChart3 className="w-6 h-6" />
-        },
-        {
-          title: "인터넷 정보 매개 및 포털 서비스",
-          description: "정보 플랫폼 구축 및 운영을 통한 가치 창출",
-          features: ["포털 개발", "정보 큐레이션", "검색 서비스", "사용자 매칭"],
-          icon: <Globe className="w-6 h-6" />
-        }
-      ]
-    },
-    {
-      id: 3,
-      icon: <BookOpen className="w-8 h-8" />,
-      title: "Content & Education",
-      subtitle: "콘텐츠 & 교육",
-      description: "창의적 콘텐츠와 교육 서비스로 가치 전달",
-      gradient: "from-orange-500 to-red-500",
-      bgGradient: "from-orange-50 to-red-50",
-      services: [
-        {
-          title: "미디어 콘텐츠 창작",
-          description: "다양한 미디어 플랫폼을 위한 창의적 콘텐츠 제작",
-          features: ["영상 제작", "그래픽 디자인", "웹툰/일러스트", "인터랙티브 콘텐츠"],
-          icon: <PlayCircle className="w-6 h-6" />
-        },
-        {
-          title: "콘텐츠 제작 및 홍보대행업",
-          description: "브랜드 스토리텔링부터 콘텐츠 유통까지 원스톱 서비스",
-          features: ["콘텐츠 기획", "제작 관리", "배포 전략", "성과 측정"],
-          icon: <Zap className="w-6 h-6" />
-        },
-        {
-          title: "온라인교육 및 컨설팅업",
-          description: "체계적인 온라인 교육 플랫폼 및 교육 컨설팅 제공",
-          features: ["LMS 구축", "교육 콘텐츠", "라이브 클래스", "학습 분석"],
-          icon: <BookOpen className="w-6 h-6" />
-        }
-      ]
-    }
-  ];
-
-  const processSteps = [
-    {
-      step: "01",
-      title: "요구사항 분석",
-      description: "고객의 니즈와 목표를 정확히 파악합니다"
-    },
-    {
-      step: "02", 
-      title: "전략 수립",
-      description: "데이터 기반의 최적화된 전략을 설계합니다"
-    },
-    {
-      step: "03",
-      title: "솔루션 개발",
-      description: "최신 기술로 맞춤형 솔루션을 구현합니다"
-    },
-    {
-      step: "04",
-      title: "테스트 & 최적화",
-      description: "철저한 검증을 통해 품질을 보장합니다"
-    },
-    {
-      step: "05",
-      title: "배포 & 운영",
-      description: "안정적인 서비스 제공과 지속적 관리를 지원합니다"
-    }
-  ];
-
-  const successCases = [
-    {
-      category: "AI 솔루션",
-      client: "제조업 A사",
-      result: "생산성 40% 향상",
-      description: "AI 기반 품질 검사 시스템 도입으로 불량률 90% 감소"
-    },
-    {
-      category: "E-commerce",
-      client: "패션 브랜드 B사", 
-      result: "매출 300% 증가",
-      description: "온라인 쇼핑몰 구축 및 디지털 마케팅 통합 솔루션"
-    },
-    {
-      category: "데이터 분석",
-      client: "금융회사 C사",
-      result: "리스크 50% 감소",
-      description: "빅데이터 분석을 통한 리스크 관리 시스템 구축"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
-      {/* Header */}
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrollY > 50 ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-3">
-                <span className="text-white font-bold text-lg">P</span>
-              </div>
-              <span className={`text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent`}>
-                Potensia
-              </span>
-            </div>
-            
-            {/* Desktop Menu */}
-            <nav className="hidden md:flex space-x-8">
-              {['Home', 'About', 'Business', 'News', 'Contact'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className={`font-medium transition-colors duration-200 hover:text-blue-600 ${
-                    scrollY > 50 ? 'text-gray-900' : 'text-white'
-                  } ${item === 'Business' ? 'text-blue-600 font-semibold' : ''}`}
-                >
-                  {item}
-                </a>
-              ))}
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className={`w-6 h-6 ${scrollY > 50 ? 'text-gray-900' : 'text-white'}`} />
-              ) : (
-                <Menu className={`w-6 h-6 ${scrollY > 50 ? 'text-gray-900' : 'text-white'}`} />
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t">
-            <div className="px-4 py-2 space-y-1">
-              {['Home', 'About', 'Business', 'News', 'Contact'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className={`block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors ${
-                    item === 'Business' ? 'text-blue-600 font-semibold' : ''
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-      </header>
-
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900" />
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-          <div className="absolute top-3/4 left-3/4 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl animate-pulse delay-2000" />
-        </div>
-
-        <div className="relative z-10 text-center text-white max-w-5xl mx-auto px-4">
-          <div className="space-y-8 animate-fadeIn">
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-              <span className="block">비즈니스</span>
-              <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                영역
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              15개 전문 영역에서 고객의 디지털 혁신을 성공으로 이끄는 포텐시아의 비즈니스 솔루션
-            </p>
-            
-            {/* Business Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-blue-300 mb-2">15+</div>
-                <div className="text-sm font-medium">사업 영역</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-purple-300 mb-2">500+</div>
-                <div className="text-sm font-medium">완료 프로젝트</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-cyan-300 mb-2">99%</div>
-                <div className="text-sm font-medium">고객 만족도</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-pink-300 mb-2">24/7</div>
-                <div className="text-sm font-medium">기술 지원</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-          <ChevronDown className="w-8 h-8" />
-        </div>
-      </section>
-
-      {/* Business Categories Overview */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              4대 핵심 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">사업 영역</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              체계적으로 분류된 전문 영역별 맞춤형 솔루션으로 고객의 성공을 보장합니다
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {businessCategories.map((category, index) => (
-              <div
-                key={index}
-                className={`group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-blue-200 ${
-                  selectedCategory === index ? 'border-blue-300 shadow-xl' : ''
-                }`}
-                onClick={() => setSelectedCategory(index)}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.bgGradient} opacity-0 group-hover:opacity-50 transition-opacity duration-500 rounded-2xl`} />
-                
-                <div className="relative z-10 text-center space-y-6">
-                  <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${category.gradient} text-white group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                    {category.icon}
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                      {category.title}
-                    </h3>
-                    <div className="text-sm font-medium text-blue-600 mb-3">{category.subtitle}</div>
-                    <p className="text-gray-600 leading-relaxed text-sm">
-                      {category.description}
-                    </p>
-                  </div>
-                  
-                  <div className="text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    자세히 보기 <ArrowRight className="ml-2 w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Detailed Services Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              상세 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">서비스</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              각 영역별 전문 서비스와 특화된 기능들을 확인해보세요
-            </p>
-          </div>
-
-          {/* Category Selector */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {businessCategories.map((category, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedCategory(index)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center space-x-2 ${
-                  selectedCategory === index
-                    ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg`
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {category.icon}
-                <span>{category.title}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Selected Category Services */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {businessCategories[selectedCategory].services.map((service, index) => (
-              <div
-                key={index}
-                className="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100"
-                onMouseEnter={() => setHoveredService(index)}
-                onMouseLeave={() => setHoveredService(null)}
-              >
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-br ${businessCategories[selectedCategory].gradient} text-white group-hover:scale-110 transition-transform duration-300`}>
-                      {service.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                        {service.title}
-                      </h3>
-                    </div>
-                  </div>
-                  
-                  <p className="text-gray-600 leading-relaxed">
-                    {service.description}
-                  </p>
-                  
-                  <div className="space-y-2">
-                    <div className="text-sm font-semibold text-gray-900 mb-3">주요 기능</div>
-                    {service.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-center space-x-2">
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                        <span className="text-sm text-gray-700">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className={`mt-6 text-blue-600 font-semibold transition-all duration-300 flex items-center ${
-                    hoveredService === index ? 'opacity-100 translate-x-2' : 'opacity-0'
-                  }`}>
-                    문의하기 <ArrowRight className="ml-2 w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              프로젝트 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">진행 과정</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              체계적인 프로세스를 통해 최고 품질의 결과물을 보장합니다
-            </p>
-          </div>
-
-          <div className="relative">
-            {/* Process Line */}
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600 transform -translate-y-1/2 rounded-full" />
-            
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-              {processSteps.map((step, index) => (
-                <div key={index} className="relative text-center">
-                  {/* Step Circle */}
-                  <div className="relative mx-auto w-16 h-16 bg-white border-4 border-blue-500 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                    <span className="text-xl font-bold text-blue-600">{step.step}</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full opacity-10" />
-                  </div>
-                  
-                  {/* Step Content */}
-                  <div className="space-y-3">
-                    <h3 className="text-lg font-bold text-gray-900">{step.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Success Cases */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              성공 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">사례</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              다양한 업계의 고객들과 함께 만들어온 성공 스토리를 확인해보세요
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {successCases.map((caseItem, index) => (
-              <div
-                key={index}
-                className="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100"
-              >
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <span className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-semibold rounded-full">
-                      {caseItem.category}
-                    </span>
-                    <Star className="w-6 h-6 text-yellow-500" />
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{caseItem.client}</h3>
-                    <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-                      {caseItem.result}
-                    </div>
-                    <p className="text-gray-600 leading-relaxed">{caseItem.description}</p>
-                  </div>
-                  
-                  <div className="text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center">
-                    자세히 보기 <ArrowRight className="ml-2 w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            프로젝트를 <span className="text-blue-300">시작하세요</span>
-          </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            포텐시아의 전문 솔루션으로 여러분의 비즈니스를 한 단계 높여보세요
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-white hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center group">
-              무료 컨설팅 신청
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-8 py-4 border-2 border-white/30 rounded-full font-semibold text-white hover:bg-white/10 transition-all duration-300">
-              사업 제안서 요청
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-white font-bold text-xl">P</span>
-                </div>
-                <span className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Potensia
-                </span>
-              </div>
-              <p className="text-gray-400 text-lg leading-relaxed mb-6">
-                15개 전문 영역에서 고객의 디지털 혁신을 성공으로 이끄는 포텐시아입니다.
-              </p>
-              <div className="text-sm text-gray-500">
-                <p>도메인: potensiainc.com</p>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-4">사업 영역</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Software & AI</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Digital Marketing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Consulting</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Content & Education</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-4">문의하기</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">프로젝트 문의</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">파트너십</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">기술 지원</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">일반 문의</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Potensia Inc. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-
-      <style jsx>{`
+    </script>
+    <style>
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fadeIn {
-          animation: fadeIn 1s ease-out;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
-      `}</style>
-    </div>
-  );
-};
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #7c3aed 100%);
+        }
+        .category-active {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-white overflow-x-hidden">
+    <!-- Header -->
+    <header id="header" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-white font-bold text-lg">P</span>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Potensia
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Home</a>
+                    <a href="about.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">About</a>
+                    <a href="business.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-blue-600 font-semibold">Business</a>
+                    <a href="news.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">News</a>
+                    <a href="contact.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Contact</a>
+                </nav>
 
-export default PotensiaBusinessPage;
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <div class="px-4 py-2 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Home</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">About</a>
+                <a href="business.html" class="block px-3 py-2 text-blue-600 font-semibold">Business</a>
+                <a href="news.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">News</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden hero-bg">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute top-3/4 left-3/4 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="relative z-10 text-center text-white max-w-5xl mx-auto px-4">
+            <div class="space-y-8 animate-fadeIn">
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                    <span class="block">비즈니스</span>
+                    <span class="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        영역
+                    </span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    15개 전문 영역에서 고객의 디지털 혁신을 성공으로 이끄는 포텐시아의 비즈니스 솔루션
+                </p>
+                
+                <!-- Business Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                    <div class="text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-blue-300 mb-2">15+</div>
+                        <div class="text-sm font-medium">사업 영역</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-purple-300 mb-2">500+</div>
+                        <div class="text-sm font-medium">완료 프로젝트</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-cyan-300 mb-2">99%</div>
+                        <div class="text-sm font-medium">고객 만족도</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-pink-300 mb-2">24/7</div>
+                        <div class="text-sm font-medium">기술 지원</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Business Categories Overview -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    4대 핵심 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">사업 영역</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    체계적으로 분류된 전문 영역별 맞춤형 솔루션으로 고객의 성공을 보장합니다
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="business-categories">
+                <!-- Category 1: Software & AI -->
+                <div class="category-card group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-blue-200" data-category="0">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 opacity-0 group-hover:opacity-50 transition-opacity duration-500 rounded-2xl"></div>
+                    
+                    <div class="relative z-10 text-center space-y-6">
+                        <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                                Software & AI Solutions
+                            </h3>
+                            <div class="text-sm font-medium text-blue-600 mb-3">첨단 기술 솔루션</div>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                AI와 소프트웨어 기술로 미래를 선도합니다
+                            </p>
+                        </div>
+                        
+                        <div class="text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            자세히 보기 
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2: Digital Marketing -->
+                <div class="category-card group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-blue-200" data-category="1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-pink-50 opacity-0 group-hover:opacity-50 transition-opacity duration-500 rounded-2xl"></div>
+                    
+                    <div class="relative z-10 text-center space-y-6">
+                        <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                                Digital Marketing & E-commerce
+                            </h3>
+                            <div class="text-sm font-medium text-blue-600 mb-3">디지털 마케팅 전문</div>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                온라인 비즈니스 성장을 위한 통합 솔루션
+                            </p>
+                        </div>
+                        
+                        <div class="text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            자세히 보기 
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 3: Consulting -->
+                <div class="category-card group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-blue-200" data-category="2">
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-50 to-teal-50 opacity-0 group-hover:opacity-50 transition-opacity duration-500 rounded-2xl"></div>
+                    
+                    <div class="relative z-10 text-center space-y-6">
+                        <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 00-2-2z"></path>
+                            </svg>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                                Consulting & Data Services
+                            </h3>
+                            <div class="text-sm font-medium text-blue-600 mb-3">전문 컨설팅</div>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                데이터 기반의 전략적 비즈니스 컨설팅
+                            </p>
+                        </div>
+                        
+                        <div class="text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            자세히 보기 
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 4: Content & Education -->
+                <div class="category-card group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-blue-200" data-category="3">
+                    <div class="absolute inset-0 bg-gradient-to-br from-orange-50 to-red-50 opacity-0 group-hover:opacity-50 transition-opacity duration-500 rounded-2xl"></div>
+                    
+                    <div class="relative z-10 text-center space-y-6">
+                        <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                                Content & Education
+                            </h3>
+                            <div class="text-sm font-medium text-blue-600 mb-3">콘텐츠 & 교육</div>
+                            <p class="text-gray-600 leading-relaxed text-sm">
+                                창의적 콘텐츠와 교육 서비스로 가치 전달
+                            </p>
+                        </div>
+                        
+                        <div class="text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            자세히 보기 
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Services Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    상세 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">서비스</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    각 영역별 전문 서비스와 특화된 기능들을 확인해보세요
+                </p>
+            </div>
+
+            <!-- Category Selector -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12" id="category-selector">
+                <button class="category-btn px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg" data-category="0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                    <span>Software & AI Solutions</span>
+                </button>
+                <button class="category-btn px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center space-x-2 bg-gray-100 text-gray-700 hover:bg-gray-200" data-category="1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>Digital Marketing & E-commerce</span>
+                </button>
+                <button class="category-btn px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center space-x-2 bg-gray-100 text-gray-700 hover:bg-gray-200" data-category="2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 00-2-2z"></path>
+                    </svg>
+                    <span>Consulting & Data Services</span>
+                </button>
+                <button class="category-btn px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center space-x-2 bg-gray-100 text-gray-700 hover:bg-gray-200" data-category="3">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    <span>Content & Education</span>
+                </button>
+            </div>
+
+            <!-- Services Container -->
+            <div id="services-container" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                <!-- Services will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    프로젝트 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">진행 과정</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    체계적인 프로세스를 통해 최고 품질의 결과물을 보장합니다
+                </p>
+            </div>
+
+            <div class="relative">
+                <!-- Process Line -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600 transform -translate-y-1/2 rounded-full"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                    <div class="relative text-center">
+                        <div class="relative mx-auto w-16 h-16 bg-white border-4 border-blue-500 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                            <span class="text-xl font-bold text-blue-600">01</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full opacity-10"></div>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-bold text-gray-900">요구사항 분석</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">고객의 니즈와 목표를 정확히 파악합니다</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative text-center">
+                        <div class="relative mx-auto w-16 h-16 bg-white border-4 border-blue-500 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                            <span class="text-xl font-bold text-blue-600">02</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full opacity-10"></div>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-bold text-gray-900">전략 수립</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">데이터 기반의 최적화된 전략을 설계합니다</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative text-center">
+                        <div class="relative mx-auto w-16 h-16 bg-white border-4 border-blue-500 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                            <span class="text-xl font-bold text-blue-600">03</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full opacity-10"></div>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-lg font-bold text-gray-900">솔루션 개발</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">최신 기술로 맞춤형 솔루션을 구현합니다</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative text-center">
+                        <div class="relative mx-auto w-16 h-16 bg-white border-4 border-blue-500 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                            <span class="text-xl font-bold text-blue-600">04</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full opacity-10"></div>
+                        </div>

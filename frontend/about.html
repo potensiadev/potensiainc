@@ -1,536 +1,756 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronDown, ArrowRight, Target, Eye, Heart, Award, Users, TrendingUp, Globe, Zap, Shield, Lightbulb, Menu, X, MapPin, Phone, Mail } from 'lucide-react';
-
-const PotensiaAboutPage = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
-  const [activeTimelineItem, setActiveTimelineItem] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const coreValues = [
-    {
-      icon: <Lightbulb className="w-8 h-8" />,
-      title: "혁신",
-      description: "끊임없는 기술 혁신으로 미래를 선도합니다",
-      gradient: "from-yellow-400 to-orange-500"
-    },
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "신뢰",
-      description: "투명하고 정직한 소통으로 고객과의 신뢰를 구축합니다",
-      gradient: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: <Zap className="w-8 h-8" />,
-      title: "성장",
-      description: "고객과 함께 성장하며 지속가능한 가치를 창출합니다",
-      gradient: "from-purple-500 to-pink-500"
-    },
-    {
-      icon: <Heart className="w-8 h-8" />,
-      title: "협력",
-      description: "팀워크와 상호 존중을 바탕으로 최고의 결과를 만들어냅니다",
-      gradient: "from-red-500 to-rose-500"
-    }
-  ];
-
-  const timeline = [
-    {
-      year: "2020",
-      title: "포텐시아 설립",
-      description: "디지털 혁신을 목표로 포텐시아 주식회사 설립"
-    },
-    {
-      year: "2021",
-      title: "첫 번째 AI 솔루션 출시",
-      description: "자체 개발한 AI 기반 비즈니스 솔루션 정식 출시"
-    },
-    {
-      year: "2022",
-      title: "해외 진출",
-      description: "글로벌 파트너십 체결 및 해외 시장 진출"
-    },
-    {
-      year: "2023",
-      title: "기술 특허 취득",
-      description: "핵심 기술에 대한 다수의 특허 취득 및 기술력 인정"
-    },
-    {
-      year: "2024",
-      title: "사업 영역 확장",
-      description: "15개 사업 영역으로 확장하며 종합 디지털 솔루션 기업으로 도약"
-    },
-    {
-      year: "2025",
-      title: "미래 비전 실현",
-      description: "AI와 데이터 기반의 차세대 플랫폼으로 업계 선도"
-    }
-  ];
-
-  const leadership = [
-    {
-      name: "김대표",
-      position: "대표이사 CEO",
-      description: "20년간의 IT 업계 경험을 바탕으로 포텐시아의 비전을 이끌어가고 있습니다.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&face=center",
-      expertise: ["전략 기획", "사업 개발", "리더십"]
-    },
-    {
-      name: "박기술이사",
-      position: "기술이사 CTO",
-      description: "최신 기술 트렌드를 선도하며 혁신적인 솔루션 개발을 담당합니다.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&face=center",
-      expertise: ["AI/ML", "소프트웨어 아키텍처", "기술 전략"]
-    },
-    {
-      name: "이마케팅이사",
-      position: "마케팅이사 CMO",
-      description: "글로벌 마케팅 전략을 통해 포텐시아의 브랜드 가치를 높여가고 있습니다.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b372?w=300&h=300&fit=crop&face=center",
-      expertise: ["브랜드 전략", "디지털 마케팅", "고객 관계"]
-    }
-  ];
-
-  const achievements = [
-    { icon: <Award className="w-6 h-6" />, text: "2024 AI 혁신상 수상" },
-    { icon: <Globe className="w-6 h-6" />, text: "5개국 글로벌 파트너십" },
-    { icon: <Users className="w-6 h-6" />, text: "누적 고객 1,000+ 달성" },
-    { icon: <TrendingUp className="w-6 h-6" />, text: "연평균 120% 성장률" }
-  ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const timelineSection = document.getElementById('timeline');
-      if (timelineSection) {
-        const rect = timelineSection.getBoundingClientRect();
-        const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / window.innerHeight));
-        setActiveTimelineItem(Math.floor(progress * timeline.length));
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [timeline.length]);
-
-  return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
-      {/* Header */}
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrollY > 50 ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-3">
-                <span className="text-white font-bold text-lg">P</span>
-              </div>
-              <span className={`text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent`}>
-                Potensia
-              </span>
-            </div>
-            
-            {/* Desktop Menu */}
-            <nav className="hidden md:flex space-x-8">
-              {['Home', 'About', 'Business', 'News', 'Contact'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className={`font-medium transition-colors duration-200 hover:text-blue-600 ${
-                    scrollY > 50 ? 'text-gray-900' : 'text-white'
-                  } ${item === 'About' ? 'text-blue-600 font-semibold' : ''}`}
-                >
-                  {item}
-                </a>
-              ))}
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className={`w-6 h-6 ${scrollY > 50 ? 'text-gray-900' : 'text-white'}`} />
-              ) : (
-                <Menu className={`w-6 h-6 ${scrollY > 50 ? 'text-gray-900' : 'text-white'}`} />
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t">
-            <div className="px-4 py-2 space-y-1">
-              {['Home', 'About', 'Business', 'News', 'Contact'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className={`block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors ${
-                    item === 'About' ? 'text-blue-600 font-semibold' : ''
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-      </header>
-
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900" />
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/3 left-1/3 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        </div>
-
-        <div className="relative z-10 text-center text-white max-w-5xl mx-auto px-4">
-          <div className="space-y-8 animate-fadeIn">
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-              <span className="block">포텐시아를</span>
-              <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                소개합니다
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              디지털 혁신의 선두주자로서, 고객의 성공을 위한 최고의 솔루션을 제공하는 것이 우리의 사명입니다
-            </p>
-            
-            {/* Achievement Highlights */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-              {achievements.map((achievement, index) => (
-                <div key={index} className="flex flex-col items-center space-y-2 group">
-                  <div className="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors duration-300">
-                    {achievement.icon}
-                  </div>
-                  <span className="text-sm text-center font-medium">{achievement.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-          <ChevronDown className="w-8 h-8" />
-        </div>
-      </section>
-
-      {/* Vision & Mission Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Vision */}
-            <div className="space-y-8">
-              <div className="inline-flex items-center space-x-3">
-                <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
-                  <Eye className="w-8 h-8 text-white" />
-                </div>
-                <h2 className="text-4xl font-bold text-gray-900">Vision</h2>
-              </div>
-              
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-gray-900 leading-tight">
-                  디지털 혁신을 통해 <br />
-                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    더 나은 미래를 만드는 기업
-                  </span>
-                </h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  포텐시아는 첨단 기술과 창의적 사고를 바탕으로 고객의 비즈니스 가치를 극대화하고, 
-                  지속가능한 디지털 생태계 구축을 통해 사회에 기여하는 글로벌 기업으로 성장하고자 합니다.
-                </p>
-              </div>
-            </div>
-
-            {/* Mission */}
-            <div className="space-y-8">
-              <div className="inline-flex items-center space-x-3">
-                <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl">
-                  <Target className="w-8 h-8 text-white" />
-                </div>
-                <h2 className="text-4xl font-bold text-gray-900">Mission</h2>
-              </div>
-              
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-gray-900 leading-tight">
-                  고객 성공을 위한 <br />
-                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    최고의 디지털 솔루션 제공
-                  </span>
-                </h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  우리는 AI, 빅데이터, 클라우드 등 최신 기술을 활용하여 고객의 니즈에 맞는 맞춤형 솔루션을 제공하고, 
-                  지속적인 혁신을 통해 고객과 함께 성장하는 신뢰받는 파트너가 되겠습니다.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Core Values Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              핵심 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">가치</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              포텐시아가 추구하는 네 가지 핵심 가치로 고객과 함께 성장해나갑니다
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {coreValues.map((value, index) => (
-              <div
-                key={index}
-                className="group relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-gray-100"
-              >
-                <div className="text-center space-y-6">
-                  <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${value.gradient} text-white group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                    {value.icon}
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                    {value.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
-
-                {/* Decorative Background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl`} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Company History Timeline */}
-      <section id="timeline" className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              회사 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">연혁</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              포텐시아의 성장 스토리와 함께 걸어온 혁신의 발자취를 확인해보세요
-            </p>
-          </div>
-
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-blue-500 to-purple-600 h-full rounded-full" />
-
-            <div className="space-y-16">
-              {timeline.map((item, index) => (
-                <div
-                  key={index}
-                  className={`relative flex items-center ${
-                    index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                  } transition-all duration-700 ${
-                    index <= activeTimelineItem ? 'opacity-100 translate-y-0' : 'opacity-50 translate-y-8'
-                  }`}
-                >
-                  {/* Content */}
-                  <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'}`}>
-                    <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                      <div className="text-3xl font-bold text-blue-600 mb-2">{item.year}</div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{item.description}</p>
-                    </div>
-                  </div>
-
-                  {/* Timeline Dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white shadow-lg z-10" />
-                  
-                  {/* Empty Space */}
-                  <div className="w-5/12" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Leadership Team Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              경영진 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">소개</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              풍부한 경험과 전문성을 갖춘 포텐시아의 리더십 팀을 소개합니다
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {leadership.map((leader, index) => (
-              <div
-                key={index}
-                className="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100"
-              >
-                <div className="text-center">
-                  <div className="relative mb-6">
-                    <img
-                      src={leader.image}
-                      alt={leader.name}
-                      className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{leader.name}</h3>
-                  <div className="text-blue-600 font-semibold mb-4">{leader.position}</div>
-                  <p className="text-gray-600 leading-relaxed mb-6">{leader.description}</p>
-                  
-                  <div className="flex flex-wrap justify-center gap-2">
-                    {leader.expertise.map((skill, skillIndex) => (
-                      <span
-                        key={skillIndex}
-                        className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-medium rounded-full"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CEO Message Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-900 via-purple-900 to-blue-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20" />
-        
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="space-y-8">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              대표이사 <span className="text-blue-300">인사말</span>
-            </h2>
-            
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 md:p-12 border border-white/20">
-              <blockquote className="text-xl md:text-2xl leading-relaxed text-blue-100 mb-6">
-                "포텐시아는 단순히 기술을 제공하는 회사가 아닙니다. 
-                우리는 고객의 꿈과 비전을 현실로 만드는 파트너입니다."
-              </blockquote>
-              
-              <p className="text-lg text-blue-200 leading-relaxed mb-8">
-                급변하는 디지털 시대에서 고객의 성공이 곧 우리의 성공이라는 믿음으로, 
-                최고의 기술력과 서비스로 고객과 함께 성장해나가겠습니다. 
-                포텐시아의 여정에 함께해주시는 모든 분들께 감사드리며, 
-                더 밝은 디지털 미래를 향해 전진하겠습니다.
-              </p>
-              
-              <div className="flex items-center justify-center space-x-4">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">김</span>
-                </div>
-                <div className="text-left">
-                  <div className="font-bold text-xl">김대표</div>
-                  <div className="text-blue-300">대표이사 CEO</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            포텐시아와 함께 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">성장하세요</span>
-          </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            더 자세한 정보가 필요하시거나 협력을 원하신다면 언제든 연락해주세요
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-white hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center group">
-              파트너십 문의
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300">
-              회사 브로셔 다운로드
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-white font-bold text-xl">P</span>
-                </div>
-                <span className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Potensia
-                </span>
-              </div>
-              <p className="text-gray-400 text-lg leading-relaxed mb-6">
-                디지털 혁신을 통해 고객의 성공을 이끌어내는 믿을 수 있는 파트너, 포텐시아입니다.
-              </p>
-              <div className="text-sm text-gray-500">
-                <p>도메인: potensiainc.com</p>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-4">서비스</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">소프트웨어 개발</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">디지털 마케팅</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">컨설팅</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">콘텐츠 제작</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-4">회사 정보</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">회사 소개</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">파트너십</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">문의하기</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Potensia Inc. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-
-      <style jsx>{`
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Potensia Inc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fadeIn': 'fadeIn 1s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'slideInLeft': 'slideInLeft 0.7s ease-out',
+                        'slideInRight': 'slideInRight 0.7s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fadeIn {
-          animation: fadeIn 1s ease-out;
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
-      `}</style>
-    </div>
-  );
-};
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
+        }
+        .timeline-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-inactive {
+            opacity: 0.5;
+            transform: translateY(32px);
+        }
+    </style>
+</head>
+<body class="bg-white overflow-x-hidden">
+    <!-- Header -->
+    <header id="header" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-white font-bold text-lg">P</span>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Potensia
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Home</a>
+                    <a href="about.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-blue-600 font-semibold">About</a>
+                    <a href="business.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Business</a>
+                    <a href="news.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">News</a>
+                    <a href="contact.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Contact</a>
+                </nav>
 
-export default PotensiaAboutPage;
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <div class="px-4 py-2 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Home</a>
+                <a href="about.html" class="block px-3 py-2 text-blue-600 font-semibold">About</a>
+                <a href="business.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Business</a>
+                <a href="news.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">News</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden hero-bg">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/3 left-1/3 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+        </div>
+
+        <div class="relative z-10 text-center text-white max-w-5xl mx-auto px-4">
+            <div class="space-y-8 animate-fadeIn">
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                    <span class="block">포텐시아를</span>
+                    <span class="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        소개합니다
+                    </span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    디지털 혁신의 선두주자로서, 고객의 성공을 위한 최고의 솔루션을 제공하는 것이 우리의 사명입니다
+                </p>
+                
+                <!-- Achievement Highlights -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                    <div class="flex flex-col items-center space-y-2 group">
+                        <div class="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm text-center font-medium">2024 AI 혁신상 수상</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-2 group">
+                        <div class="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm text-center font-medium">5개국 글로벌 파트너십</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-2 group">
+                        <div class="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm text-center font-medium">누적 고객 1,000+ 달성</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-2 group">
+                        <div class="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm text-center font-medium">연평균 120% 성장률</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Vision & Mission Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Vision -->
+                <div class="space-y-8 vision-content">
+                    <div class="inline-flex items-center space-x-3">
+                        <div class="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-4xl font-bold text-gray-900">Vision</h2>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-bold text-gray-900 leading-tight">
+                            디지털 혁신을 통해 <br />
+                            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                더 나은 미래를 만드는 기업
+                            </span>
+                        </h3>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            포텐시아는 첨단 기술과 창의적 사고를 바탕으로 고객의 비즈니스 가치를 극대화하고, 
+                            지속가능한 디지털 생태계 구축을 통해 사회에 기여하는 글로벌 기업으로 성장하고자 합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Mission -->
+                <div class="space-y-8 mission-content">
+                    <div class="inline-flex items-center space-x-3">
+                        <div class="p-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-4xl font-bold text-gray-900">Mission</h2>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-bold text-gray-900 leading-tight">
+                            고객 성공을 위한 <br />
+                            <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                                최고의 디지털 솔루션 제공
+                            </span>
+                        </h3>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            우리는 AI, 빅데이터, 클라우드 등 최신 기술을 활용하여 고객의 니즈에 맞는 맞춤형 솔루션을 제공하고, 
+                            지속적인 혁신을 통해 고객과 함께 성장하는 신뢰받는 파트너가 되겠습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    핵심 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">가치</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    포텐시아가 추구하는 네 가지 핵심 가치로 고객과 함께 성장해나갑니다
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="core-values">
+                <!-- 혁신 -->
+                <div class="value-card group relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-gray-100">
+                    <div class="text-center space-y-6">
+                        <div class="inline-flex p-4 rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            혁신
+                        </h3>
+                        
+                        <p class="text-gray-600 leading-relaxed">
+                            끊임없는 기술 혁신으로 미래를 선도합니다
+                        </p>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl"></div>
+                </div>
+
+                <!-- 신뢰 -->
+                <div class="value-card group relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-gray-100">
+                    <div class="text-center space-y-6">
+                        <div class="inline-flex p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            신뢰
+                        </h3>
+                        
+                        <p class="text-gray-600 leading-relaxed">
+                            투명하고 정직한 소통으로 고객과의 신뢰를 구축합니다
+                        </p>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl"></div>
+                </div>
+
+                <!-- 성장 -->
+                <div class="value-card group relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-gray-100">
+                    <div class="text-center space-y-6">
+                        <div class="inline-flex p-4 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            성장
+                        </h3>
+                        
+                        <p class="text-gray-600 leading-relaxed">
+                            고객과 함께 성장하며 지속가능한 가치를 창출합니다
+                        </p>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl"></div>
+                </div>
+
+                <!-- 협력 -->
+                <div class="value-card group relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-gray-100">
+                    <div class="text-center space-y-6">
+                        <div class="inline-flex p-4 rounded-2xl bg-gradient-to-br from-red-500 to-rose-500 text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                            협력
+                        </h3>
+                        
+                        <p class="text-gray-600 leading-relaxed">
+                            팀워크와 상호 존중을 바탕으로 최고의 결과를 만들어냅니다
+                        </p>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-red-500 to-rose-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company History Timeline -->
+    <section id="timeline" class="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    회사 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">연혁</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    포텐시아의 성장 스토리와 함께 걸어온 혁신의 발자취를 확인해보세요
+                </p>
+            </div>
+
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-blue-500 to-purple-600 h-full rounded-full"></div>
+
+                <div class="space-y-16" id="timeline-items">
+                    <!-- 2020 -->
+                    <div class="timeline-item relative flex items-center flex-row transition-all duration-700 timeline-inactive">
+                        <div class="w-5/12 text-right pr-8">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                                <div class="text-3xl font-bold text-blue-600 mb-2">2020</div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">포텐시아 설립</h3>
+                                <p class="text-gray-600 leading-relaxed">디지털 혁신을 목표로 포텐시아 주식회사 설립</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div class="w-5/12"></div>
+                    </div>
+
+                    <!-- 2023 -->
+                    <div class="timeline-item relative flex items-center flex-row-reverse transition-all duration-700 timeline-inactive">
+                        <div class="w-5/12 text-left pl-8">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                                <div class="text-3xl font-bold text-blue-600 mb-2">2023</div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">기술 특허 취득</h3>
+                                <p class="text-gray-600 leading-relaxed">핵심 기술에 대한 다수의 특허 취득 및 기술력 인정</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div class="w-5/12"></div>
+                    </div>
+
+                    <!-- 2024 -->
+                    <div class="timeline-item relative flex items-center flex-row transition-all duration-700 timeline-inactive">
+                        <div class="w-5/12 text-right pr-8">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                                <div class="text-3xl font-bold text-blue-600 mb-2">2024</div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">사업 영역 확장</h3>
+                                <p class="text-gray-600 leading-relaxed">15개 사업 영역으로 확장하며 종합 디지털 솔루션 기업으로 도약</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div class="w-5/12"></div>
+                    </div>
+
+                    <!-- 2025 -->
+                    <div class="timeline-item relative flex items-center flex-row-reverse transition-all duration-700 timeline-inactive">
+                        <div class="w-5/12 text-left pl-8">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                                <div class="text-3xl font-bold text-blue-600 mb-2">2025</div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">미래 비전 실현</h3>
+                                <p class="text-gray-600 leading-relaxed">AI와 데이터 기반의 차세대 플랫폼으로 업계 선도</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div class="w-5/12"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    경영진 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">소개</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    풍부한 경험과 전문성을 갖춘 포텐시아의 리더십 팀을 소개합니다
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- CEO -->
+                <div class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="text-center">
+                        <div class="relative mb-6">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&face=center" 
+                                 alt="김대표" 
+                                 class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">김대표</h3>
+                        <div class="text-blue-600 font-semibold mb-4">대표이사 CEO</div>
+                        <p class="text-gray-600 leading-relaxed mb-6">20년간의 IT 업계 경험을 바탕으로 포텐시아의 비전을 이끌어가고 있습니다.</p>
+                        
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-medium rounded-full">전략 기획</span>
+                            <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-medium rounded-full">사업 개발</span>
+                            <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-medium rounded-full">리더십</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTO -->
+                <div class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="text-center">
+                        <div class="relative mb-6">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&face=center" 
+                                 alt="박기술이사" 
+                                 class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">박기술이사</h3>
+                        <div class="text-blue-600 font-semibold mb-4">기술이사 CTO</div>
+                        <p class="text-gray-600 leading-relaxed mb-6">최신 기술 트렌드를 선도하며 혁신적인 솔루션 개발을 담당합니다.</p>
+                        
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-medium rounded-full">AI/ML</span>
+                            <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-medium rounded-full">소프트웨어 아키텍처</span>
+                            <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-medium rounded-full">기술 전략</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CMO -->
+                <div class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="text-center">
+                        <div class="relative mb-6">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b372?w=300&h=300&fit=crop&face=center" 
+                                 alt="이마케팅이사" 
+                                 class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">이마케팅이사</h3>
+                        <div class="text-blue-600 font-semibold mb-4">마케팅이사 CMO</div>
+                        <p class="text-gray-600 leading-relaxed mb-6">글로벌 마케팅 전략을 통해 포텐시아의 브랜드 가치를 높여가고 있습니다.</p>
+                        
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-medium rounded-full">브랜드 전략</span>
+                            <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-medium rounded-full">디지털 마케팅</span>
+                            <span class="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-sm font-medium rounded-full">고객 관계</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CEO Message Section -->
+    <section class="py-20 bg-gradient-to-r from-blue-900 via-purple-900 to-blue-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="space-y-8">
+                <h2 class="text-4xl md:text-5xl font-bold mb-8">
+                    대표이사 <span class="text-blue-300">인사말</span>
+                </h2>
+                
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 md:p-12 border border-white/20">
+                    <blockquote class="text-xl md:text-2xl leading-relaxed text-blue-100 mb-6">
+                        "포텐시아는 단순히 기술을 제공하는 회사가 아닙니다. 
+                        우리는 고객의 꿈과 비전을 현실로 만드는 파트너입니다."
+                    </blockquote>
+                    
+                    <p class="text-lg text-blue-200 leading-relaxed mb-8">
+                        급변하는 디지털 시대에서 고객의 성공이 곧 우리의 성공이라는 믿음으로, 
+                        최고의 기술력과 서비스로 고객과 함께 성장해나가겠습니다. 
+                        포텐시아의 여정에 함께해주시는 모든 분들께 감사드리며, 
+                        더 밝은 디지털 미래를 향해 전진하겠습니다.
+                    </p>
+                    
+                    <div class="flex items-center justify-center space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">김</span>
+                        </div>
+                        <div class="text-left">
+                            <div class="font-bold text-xl">김대표</div>
+                            <div class="text-blue-300">대표이사 CEO</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                포텐시아와 함께 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">성장하세요</span>
+            </h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                더 자세한 정보가 필요하시거나 협력을 원하신다면 언제든 연락해주세요
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-white hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center group">
+                    파트너십 문의
+                    <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+                <button class="px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300">
+                    회사 브로셔 다운로드
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-xl">P</span>
+                        </div>
+                        <span class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                            Potensia
+                        </span>
+                    </div>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        디지털 혁신을 통해 고객의 성공을 이끌어내는 믿을 수 있는 파트너, 포텐시아입니다.
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <p>도메인: potensiainc.com</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">서비스</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">소프트웨어 개발</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">디지털 마케팅</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">컨설팅</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">콘텐츠 제작</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">회사 정보</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="about.html" class="hover:text-white transition-colors">회사 소개</a></li>
+                        <li><a href="business.html" class="hover:text-white transition-colors">파트너십</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Potensia Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            const scrollY = window.pageYOffset;
+            
+            if (scrollY > 50) {
+                header.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-lg');
+                header.classList.remove('bg-transparent');
+                
+                const navLinks = header.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    if (!link.classList.contains('text-blue-600')) {
+                        link.classList.remove('text-white');
+                        link.classList.add('text-gray-900');
+                    }
+                });
+            } else {
+                header.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-lg');
+                header.classList.add('bg-transparent');
+                
+                const navLinks = header.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    if (!link.classList.contains('text-blue-600')) {
+                        link.classList.remove('text-gray-900');
+                        link.classList.add('text-white');
+                    }
+                });
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Timeline animation on scroll
+        function updateTimeline() {
+            const timelineSection = document.getElementById('timeline');
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            if (!timelineSection) return;
+            
+            const rect = timelineSection.getBoundingClientRect();
+            const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / window.innerHeight));
+            const activeIndex = Math.floor(progress * timelineItems.length);
+            
+            timelineItems.forEach((item, index) => {
+                if (index <= activeIndex) {
+                    item.classList.remove('timeline-inactive');
+                    item.classList.add('timeline-active');
+                } else {
+                    item.classList.remove('timeline-active');
+                    item.classList.add('timeline-inactive');
+                }
+            });
+        }
+
+        // Vision & Mission scroll animations
+        function setupVisionMissionAnimations() {
+            const visionContent = document.querySelector('.vision-content');
+            const missionContent = document.querySelector('.mission-content');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('vision-content')) {
+                            entry.target.classList.add('animate-slideInLeft');
+                        } else if (entry.target.classList.contains('mission-content')) {
+                            entry.target.classList.add('animate-slideInRight');
+                        }
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            if (visionContent) observer.observe(visionContent);
+            if (missionContent) observer.observe(missionContent);
+        }
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.value-card, .group').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Scroll event listeners
+        window.addEventListener('scroll', function() {
+            updateTimeline();
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            setupVisionMissionAnimations();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add interactive hover effects
+        document.querySelectorAll('.group, .value-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Loading animation
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
+                        <div class="w-5/12"></div>
+                    </div>
+
+                    <!-- 2021 -->
+                    <div class="timeline-item relative flex items-center flex-row-reverse transition-all duration-700 timeline-inactive">
+                        <div class="w-5/12 text-left pl-8">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                                <div class="text-3xl font-bold text-blue-600 mb-2">2021</div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">첫 번째 AI 솔루션 출시</h3>
+                                <p class="text-gray-600 leading-relaxed">자체 개발한 AI 기반 비즈니스 솔루션 정식 출시</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div class="w-5/12"></div>
+                    </div>
+
+                    <!-- 2022 -->
+                    <div class="timeline-item relative flex items-center flex-row transition-all duration-700 timeline-inactive">
+                        <div class="w-5/12 text-right pr-8">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                                <div class="text-3xl font-bold text-blue-600 mb-2">2022</div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">해외 진출</h3>
+                                <p class="text-gray-600 leading-relaxed">글로벌 파트너십 체결 및 해외 시장 진출</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full border-4 border-white shadow-lg z-10"></div>
