@@ -3,438 +3,546 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Potensia Inc - 디지털 혁신 파트너</title>
+    <title>Potensia Inc. - 디지털 혁신을 선도하는 기업</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    animation: {
-                        'fadeIn': 'fadeIn 1s ease-out',
-                        'float': 'float 6s ease-in-out infinite',
-                    }
-                }
-            }
-        }
-    </script>
     <style>
+        /* Flexbox layout for footer positioning */
+        html, body {
+            height: 100%;
+        }
+
+        .page-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            flex: 1;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .animate-fadeInLeft {
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+
+        /* Hero background animation */
         .hero-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #0f172a 100%);
+        }
+
+        /* Navigation styles */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #2563eb, #7c3aed);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Card hover effects */
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Stats counter animation */
+        .stat-counter {
+            transition: transform 0.3s ease;
+        }
+
+        .stat-counter:hover {
+            transform: scale(1.05);
+        }
+
+        /* Header scroll effect */
+        .header-scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-scrolled .nav-link {
+            color: #1f2937;
+        }
+
+        .header-scrolled .nav-link:hover {
+            color: #2563eb;
         }
     </style>
 </head>
 <body class="bg-white overflow-x-hidden">
-    <!-- Header -->
-    <header id="header" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-3">
-                        <span class="text-white font-bold text-lg">P</span>
-                    </div>
-                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        Potensia
-                    </span>
-                </div>
-                
-                <!-- Desktop Menu -->
-              <nav class="hidden md:flex space-x-8">
-                <a href="index.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Home</a>
-                <a href="about.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">About</a>
-                <a href="business.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Business</a>
-                <a href="news.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">News</a>
-                <a href="contact.html" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Contact</a>
-              </nav>
+    <div class="page-container">
+        <div class="content-wrapper">
+            <!-- Header -->
+            <header id="header" class="fixed top-0 w-full z-50 transition-all duration-300">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center py-4">
+                        <!-- Logo -->
+                        <div class="flex items-center">
+                            <a href="#home" class="flex items-center group">
+                                <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="text-white font-bold text-lg">P</span>
+                                </div>
+                                <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                    Potensia
+                                </span>
+                            </a>
+                        </div>
 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden p-2">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
+                        <!-- Desktop Navigation -->
+                        <nav class="hidden md:flex space-x-8">
+                            <a href="#home" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Home</a>
+                            <a href="#about" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">About</a>
+                            <a href="#business" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Business</a>
+                            <a href="#news" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">News</a>
+                            <a href="#contact" class="nav-link font-medium transition-colors duration-200 hover:text-blue-600 text-white">Contact</a>
+                        </nav>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
-            <div class="px-4 py-2 space-y-1">
-              <a href="index.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Home</a>
-              <a href="about.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">About</a>
-              <a href="business.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Business</a>
-              <a href="news.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">News</a>
-              <a href="contact.html" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Contact</a>
-      </div>
-  </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden hero-bg">
-        <!-- Animated Background Elements -->
-        <div class="absolute inset-0">
-            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
-        </div>
-
-        <div class="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-            <div class="space-y-6 animate-fadeIn">
-                <h1 class="text-5xl md:text-7xl font-bold leading-tight">
-                    <span class="block">Digital Innovation으로</span>
-                    <span class="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                        미래를 설계합니다
-                    </span>
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                    포텐시아는 첨단 기술로 고객의 성공을 이끌어내는 디지털 혁신 파트너입니다.
-                </p>
-                <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8"> -->
-                    <!-- <button class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-white hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center group">
-                        서비스 알아보기
-                        <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button> -->
-                    <!-- <button class="px-8 py-4 border-2 border-white/30 rounded-full font-semibold text-white hover:bg-white/10 transition-all duration-300">
-                        문의하기
-                    </button> -->
-                <!-- </div> -->
-            </div>
-        </div>
-
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="business" class="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                    핵심 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">서비스</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    포텐시아의 다양한 서비스 영역으로 고객의 디지털 전환을 성공적으로 이끌어갑니다
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        <!-- Mobile Menu Button -->
+                        <button id="mobile-menu-btn" class="md:hidden p-2">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                             </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                            Software & AI Solutions
-                        </h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            첨단 AI 기술과 소프트웨어 개발로 디지털 혁신을 이끌어갑니다.
-                        </p>
+                        </button>
                     </div>
                 </div>
 
-                <div class="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-white mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                            Digital Marketing & E-commerce
-                        </h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            온라인 마케팅과 전자상거래 솔루션으로 비즈니스 성장을 가속화합니다.
-                        </p>
+                <!-- Mobile Menu -->
+                <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+                    <div class="px-4 py-2 space-y-1">
+                        <a href="#home" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Home</a>
+                        <a href="#about" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">About</a>
+                        <a href="#business" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Business</a>
+                        <a href="#news" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">News</a>
+                        <a href="#contact" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Contact</a>
                     </div>
+                </div>
+            </header>
+
+            <!-- Hero Section -->
+            <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden hero-bg">
+                <!-- Animated Background Elements -->
+                <div class="absolute inset-0">
+                    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+                    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+                    <div class="absolute top-3/4 left-3/4 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s;"></div>
                 </div>
 
-                <div class="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-pink-500 to-red-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-pink-500 to-red-600 text-white mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 00-2-2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                            Consulting & Data Services
-                        </h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            전문적인 컨설팅과 데이터 분석으로 최적의 비즈니스 전략을 제시합니다.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-red-500 to-orange-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-red-500 to-orange-600 text-white mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                            Content & Education
-                        </h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            창의적인 콘텐츠 제작과 온라인 교육으로 가치를 창출합니다.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="py-20 bg-gradient-to-r from-blue-900 via-purple-900 to-blue-900 text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/20"></div>
-        
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                    신뢰할 수 있는 <span class="text-blue-300">파트너</span>
-                </h2>
-                <p class="text-xl text-blue-100 max-w-2xl mx-auto">
-                    수많은 프로젝트와 파트너십을 통해 쌓아온 포텐시아의 신뢰와 경험
-                </p>
-            </div>
-
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center group">
-                    <div class="mb-4">
-                        <div class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                            500+
-                        </div>
-                        <div class="text-lg md:text-xl font-semibold text-blue-100">
-                            완료 프로젝트
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center group">
-                    <div class="mb-4">
-                        <div class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                            50+
-                        </div>
-                        <div class="text-lg md:text-xl font-semibold text-blue-100">
-                            파트너사
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center group">
-                    <div class="mb-4">
-                        <div class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                            10+
-                        </div>
-                        <div class="text-lg md:text-xl font-semibold text-blue-100">
-                            사업 영역
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center group">
-                    <div class="mb-4">
-                        <div class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                            99%
-                        </div>
-                        <div class="text-lg md:text-xl font-semibold text-blue-100">
-                            고객 만족도
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- News Section -->
-    <section id="news" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                    최신 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">소식</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    포텐시아의 최신 소식과 업계 동향을 확인해보세요
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <article class="group cursor-pointer">
-                    <div class="relative overflow-hidden rounded-2xl mb-6">
-                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop" 
-                             alt="AI 기반 맞춤형 솔루션 출시" 
-                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 bg-blue-600 text-white text-sm font-semibold rounded-full">
-                                제품 출시
+                <div class="relative z-10 text-center text-white max-w-5xl mx-auto px-4">
+                    <div class="space-y-8 animate-fadeIn">
+                        <h1 class="text-5xl md:text-7xl font-black leading-tight">
+                            디지털 혁신을<br>
+                            <span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                                선도하는 기업
                             </span>
+                        </h1>
+                        
+                        <p class="text-xl md:text-2xl text-gray-200 font-light max-w-3xl mx-auto leading-relaxed">
+                            포텐시아는 첨단 기술과 창의적 솔루션으로 고객의 성공을 이끌어내는 신뢰할 수 있는 파트너입니다
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
+                            <button onclick="document.getElementById('business').scrollIntoView({behavior: 'smooth'})" class="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center">
+                                사업 분야 보기
+                                <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                            
+                            <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="group px-8 py-4 border-2 border-white/30 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center">
+                                문의하기
+                                <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- Stats Section (About으로 연결) -->
+            <section id="about" class="py-20 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                            <span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                                포텐시아와 함께
+                            </span><br>
+                            성장하는 숫자들
+                        </h2>
+                        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                            고객의 성공이 곧 우리의 성공입니다. 함께 만들어온 성과를 확인해보세요.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div class="text-center stat-counter group">
+                            <div class="bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl p-8 group-hover:bg-gradient-to-br group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-300">
+                                <div class="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                                    100+
+                                </div>
+                                <div class="text-lg font-semibold text-gray-200">완료 프로젝트</div>
+                                <div class="text-sm text-gray-400 mt-2">성공적인 디지털 변화</div>
+                            </div>
+                        </div>
+
+                        <div class="text-center stat-counter group">
+                            <div class="bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl p-8 group-hover:bg-gradient-to-br group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-300">
+                                <div class="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                                    50+
+                                </div>
+                                <div class="text-lg font-semibold text-gray-200">글로벌 고객</div>
+                                <div class="text-sm text-gray-400 mt-2">신뢰하는 파트너십</div>
+                            </div>
+                        </div>
+
+                        <div class="text-center stat-counter group">
+                            <div class="bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl p-8 group-hover:bg-gradient-to-br group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-300">
+                                <div class="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                                    5+
+                                </div>
+                                <div class="text-lg font-semibold text-gray-200">년간 경험</div>
+                                <div class="text-sm text-gray-400 mt-2">축적된 전문성</div>
+                            </div>
+                        </div>
+
+                        <div class="text-center stat-counter group">
+                            <div class="bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl p-8 group-hover:bg-gradient-to-br group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-300">
+                                <div class="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                                    98%
+                                </div>
+                                <div class="text-lg font-semibold text-gray-200">고객 만족도</div>
+                                <div class="text-sm text-gray-400 mt-2">검증된 품질</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- About 더보기 버튼 -->
+                    <div class="text-center mt-16">
+                        <button onclick="window.location.href='about.html'" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                            회사 소개 자세히 보기
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section (Business로 연결) -->
+            <section id="business" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                혁신적인 서비스
+                            </span><br>
+                            비즈니스 솔루션
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            다양한 산업 분야에서 검증된 전문성으로 고객의 디지털 혁신을 지원합니다
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Software & AI -->
+                        <div class="service-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-blue-200">
+                            <div class="text-center space-y-6">
+                                <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white shadow-lg">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                    </svg>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">Software & AI</h3>
+                                    <div class="text-sm font-medium text-blue-600 mb-3">소프트웨어 & AI</div>
+                                    <p class="text-gray-600 leading-relaxed text-sm">
+                                        최신 기술과 AI를 활용한 맞춤형 소프트웨어 솔루션
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Digital Marketing -->
+                        <div class="service-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-green-200">
+                            <div class="text-center space-y-6">
+                                <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 text-white shadow-lg">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+                                    </svg>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">Digital Marketing</h3>
+                                    <div class="text-sm font-medium text-green-600 mb-3">디지털 마케팅</div>
+                                    <p class="text-gray-600 leading-relaxed text-sm">
+                                        데이터 기반의 전략적 디지털 마케팅 서비스
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Consulting -->
+                        <div class="service-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-purple-200">
+                            <div class="text-center space-y-6">
+                                <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-lg">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">Consulting</h3>
+                                    <div class="text-sm font-medium text-purple-600 mb-3">비즈니스 컨설팅</div>
+                                    <p class="text-gray-600 leading-relaxed text-sm">
+                                        전략적 사고와 실행력을 바탕으로 한 전문 컨설팅
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content & Education -->
+                        <div class="service-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 cursor-pointer border-2 border-transparent hover:border-orange-200">
+                            <div class="text-center space-y-6">
+                                <div class="inline-flex p-4 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-lg">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">Content & Education</h3>
+                                    <div class="text-sm font-medium text-orange-600 mb-3">콘텐츠 & 교육</div>
+                                    <p class="text-gray-600 leading-relaxed text-sm">
+                                        창의적 콘텐츠와 교육 서비스로 가치 전달
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business 더보기 버튼 -->
+                    <div class="text-center mt-16">
+                        <button onclick="window.location.href='business.html'" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                            비즈니스 자세히 보기
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- News Section -->
+            <section id="news" class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                최신 소식
+                            </span><br>
+                            포텐시아 뉴스
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            포텐시아의 최신 소식과 업계 동향을 확인해보세요
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <article class="group cursor-pointer">
+                            <div class="relative overflow-hidden rounded-2xl mb-6">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop" 
+                                     alt="디지털 전환 컨설팅 서비스" 
+                                     class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div class="absolute top-4 left-4">
+                                    <span class="px-3 py-1 bg-purple-600 text-white text-sm font-semibold rounded-full">
+                                        서비스
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="text-sm text-gray-500">2025.07.15</div>
+                                <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
+                                    디지털 전환 컨설팅 서비스 확대
+                                </h3>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- News 더보기 버튼 -->
+                    <div class="text-center mt-16">
+                        <button onclick="window.location.href='news.html'" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                            모든 뉴스 보기
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section id="contact" class="py-20 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 text-white relative overflow-hidden">
+                <div class="absolute inset-0">
+                    <div class="absolute top-1/2 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+                </div>
+
+                <div class="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        <span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                            함께 성장할
+                        </span><br>
+                        준비가 되셨나요?
+                    </h2>
                     
-                    <div class="space-y-3">
-                        <div class="text-sm text-gray-500">2025.07.20</div>
-                        <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
-                            AI 기반 맞춤형 솔루션 출시
-                        </h3>
-                    </div>
-                </article>
-
-                <article class="group cursor-pointer">
-                    <div class="relative overflow-hidden rounded-2xl mb-6">
-                        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&h=250&fit=crop" 
-                             alt="글로벌 파트너십 확대" 
-                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 bg-blue-600 text-white text-sm font-semibold rounded-full">
-                                비즈니스
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-3">
-                        <div class="text-sm text-gray-500">2025.07.15</div>
-                        <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
-                            글로벌 파트너십 확대
-                        </h3>
-                    </div>
-                </article>
-
-                <article class="group cursor-pointer">
-                    <div class="relative overflow-hidden rounded-2xl mb-6">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop" 
-                             alt="디지털 전환 컨설팅 서비스" 
-                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 bg-blue-600 text-white text-sm font-semibold rounded-full">
-                                서비스
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-3">
-                        <div class="text-sm text-gray-500">2025.07.10</div>
-                        <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
-                            디지털 전환 컨설팅 서비스 확대
-                        </h3>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="contact" class="py-20 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 text-white relative overflow-hidden">
-        <div class="absolute inset-0">
-            <div class="absolute top-1/2 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-        </div>
-
-        <div class="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                지금 바로 <span class="text-blue-300">시작하세요</span>
-            </h2>
-            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                포텐시아와 함께 디지털 혁신의 여정을 시작하고, 새로운 성장 동력을 발견해보세요
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-white hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center group">
-                    무료 상담 신청
-                    <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </button>
-                <button class="px-8 py-4 border-2 border-white/30 rounded-full font-semibold text-white hover:bg-white/10 transition-all duration-300">
-                    포트폴리오 보기
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="md:col-span-2">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-4">
-                            <span class="text-white font-bold text-xl">P</span>
-                        </div>
-                        <span class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                            Potensia
-                        </span>
-                    </div>
-                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
-                        디지털 혁신을 통해 고객의 성공을 이끌어내는 믿을 수 있는 파트너, 포텐시아입니다.
+                    <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+                        포텐시아와 함께 디지털 혁신의 새로운 장을 열어보세요. 전문가가 직접 상담해드립니다.
                     </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        <button onclick="window.location.href='contact.html'" class="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center">
+                            무료 상담 신청
+                            <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </button>
+                        
+                        <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})" class="group px-8 py-4 border-2 border-white/30 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center">
+                            회사 소개 보기
+                            <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-6m-8 0H3m2 0h6M9 7h6m-6 4h6m-6 4h6"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">서비스</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">소프트웨어 개발</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">디지털 마케팅</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">컨설팅</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">콘텐츠 제작</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">회사 정보</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#about" class="hover:text-white transition-colors">회사 소개</a></li>
-                        <li><a href="#business" class="hover:text-white transition-colors">파트너십</a></li>
-                        <li><a href="#contact" class="hover:text-white transition-colors">문의하기</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 Potensia Inc. All rights reserved.</p>
-            </div>
+            </section>
         </div>
-    </footer>
 
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- Company Info -->
+                    <div class="md:col-span-2">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-white font-bold text-xl">P</span>
+                            </div>
+                            <span class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                                Potensia
+                            </span>
+                        </div>
+                        
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6 max-w-md">
+                            디지털 혁신을 통해 고객의 성공을 이끌어내는 믿을 수 있는 파트너, 포텐시아입니다.
+                        </p>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <span class="text-gray-400">서울특별시 강남구 테헤란로 123길 45</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                <span class="text-gray-400">1588-0000</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <span class="text-gray-400">contact@potensiainc.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Services -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-6">서비스</h3>
+                        <ul class="space-y-3">
+                            <li><a href="business.html#software" class="text-gray-400 hover:text-white transition-colors">소프트웨어 개발</a></li>
+                            <li><a href="business.html#marketing" class="text-gray-400 hover:text-white transition-colors">디지털 마케팅</a></li>
+                            <li><a href="business.html#consulting" class="text-gray-400 hover:text-white transition-colors">컨설팅</a></li>
+                            <li><a href="business.html#content" class="text-gray-400 hover:text-white transition-colors">콘텐츠 제작</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Company -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-6">회사 정보</h3>
+                        <ul class="space-y-3">
+                            <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors">회사 소개</a></li>
+                            <li><a href="news.html" class="text-gray-400 hover:text-white transition-colors">뉴스 & 소식</a></li>
+                            <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors">문의하기</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">개인정보처리방침</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                    <p>&copy; 2025 Potensia Inc. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
     <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
-            const scrollY = window.pageYOffset;
+            const navLinks = document.querySelectorAll('.nav-link');
             
-            if (scrollY > 50) {
-                header.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-lg');
-                header.classList.remove('bg-transparent');
-                
-                // Change text colors
-                const navLinks = header.querySelectorAll('.nav-link');
+            if (window.scrollY > 100) {
+                header.classList.add('header-scrolled');
                 navLinks.forEach(link => {
                     link.classList.remove('text-white');
                     link.classList.add('text-gray-900');
                 });
             } else {
-                header.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-lg');
-                header.classList.add('bg-transparent');
-                
-                // Change text colors back
-                const navLinks = header.querySelectorAll('.nav-link');
+                header.classList.remove('header-scrolled');
                 navLinks.forEach(link => {
                     link.classList.remove('text-gray-900');
                     link.classList.add('text-white');
@@ -442,19 +550,39 @@
             }
         });
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
+        // Smooth scrolling for anchor links (already handled by CSS scroll-behavior)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
 
+        // Active navigation highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
             });
         });
 
@@ -472,57 +600,9 @@
             });
         }, observerOptions);
 
-        // Observe service cards and news articles
-        document.querySelectorAll('.group').forEach(el => {
+        // Observe service cards and other elements
+        document.querySelectorAll('.service-card, .stat-counter, article').forEach(el => {
             observer.observe(el);
-        });
-
-        // Hero slide functionality (optional - can add multiple slides later)
-        let currentSlide = 0;
-        const heroTexts = [
-            {
-                title: "Digital Innovation으로",
-                subtitle: "미래를 설계합니다",
-                description: "포텐시아는 첨단 기술로 고객의 성공을 이끌어내는 디지털 혁신 파트너입니다."
-            },
-            {
-                title: "AI와 데이터로",
-                subtitle: "새로운 가치를 창조합니다",
-                description: "인공지능과 빅데이터 기술을 활용한 맞춤형 솔루션을 제공합니다."
-            },
-            {
-                title: "글로벌 네트워크로",
-                subtitle: "무한한 성장을 지원합니다",
-                description: "전 세계 파트너와 함께 고객의 비즈니스 확장을 도와드립니다."
-            }
-        ];
-
-        // Auto-change hero text every 5 seconds
-        setInterval(function() {
-            currentSlide = (currentSlide + 1) % heroTexts.length;
-            const heroText = heroTexts[currentSlide];
-            
-            // Update hero content with fade effect
-            const heroContent = document.querySelector('#home .space-y-6');
-            heroContent.style.opacity = '0.7';
-            
-            setTimeout(function() {
-                document.querySelector('#home h1 span:first-child').textContent = heroText.title;
-                document.querySelector('#home h1 span:last-child').textContent = heroText.subtitle;
-                document.querySelector('#home p').textContent = heroText.description;
-                heroContent.style.opacity = '1';
-            }, 300);
-        }, 5000);
-
-        // Add some interactive effects
-        document.querySelectorAll('.group').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
         });
 
         // Loading animation
@@ -531,4 +611,46 @@
         });
     </script>
 </body>
-</html>
+</html>551434678-e076c223a692?w=400&h=250&fit=crop" 
+                                     alt="AI 기술 혁신" 
+                                     class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div class="absolute top-4 left-4">
+                                    <span class="px-3 py-1 bg-blue-600 text-white text-sm font-semibold rounded-full">
+                                        기술
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="text-sm text-gray-500">2025.07.25</div>
+                                <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
+                                    AI 기반 솔루션으로 새로운 혁신 창출
+                                </h3>
+                            </div>
+                        </article>
+
+                        <article class="group cursor-pointer">
+                            <div class="relative overflow-hidden rounded-2xl mb-6">
+                                <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=250&fit=crop" 
+                                     alt="글로벌 파트너십" 
+                                     class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div class="absolute top-4 left-4">
+                                    <span class="px-3 py-1 bg-green-600 text-white text-sm font-semibold rounded-full">
+                                        파트너십
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="text-sm text-gray-500">2025.07.20</div>
+                                <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
+                                    글로벌 파트너십 확대
+                                </h3>
+                            </div>
+                        </article>
+
+                        <article class="group cursor-pointer">
+                            <div class="relative overflow-hidden rounded-2xl mb-6">
+                                <img src="https://images.unsplash.com/photo-1
