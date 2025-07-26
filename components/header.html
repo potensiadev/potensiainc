@@ -1,0 +1,416 @@
+<!-- 
+==========================================================================
+POTENSIA INC. - COMMON HEADER COMPONENT
+==========================================================================
+-->
+
+<header class="header fixed top-0 w-full z-50 transition-all duration-300" data-header>
+  <div class="container-custom">
+    <div class="flex justify-between items-center py-4">
+      
+      <!-- Logo Section -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center group" aria-label="Potensia 홈페이지로 이동">
+          <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+            <span class="text-white font-bold text-lg">P</span>
+          </div>
+          <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Potensia
+          </span>
+        </a>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-8" role="navigation" aria-label="주 메뉴">
+        <a href="/" 
+           class="nav-link-modern relative group" 
+           data-nav-link="home"
+           aria-current="page">
+          Home
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href="/about.html" 
+           class="nav-link-modern relative group" 
+           data-nav-link="about">
+          About
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href="/business.html" 
+           class="nav-link-modern relative group" 
+           data-nav-link="business">
+          Business
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href="/news.html" 
+           class="nav-link-modern relative group" 
+           data-nav-link="news">
+          News
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <a href="/contact.html" 
+           class="nav-link-modern relative group" 
+           data-nav-link="contact">
+          Contact
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+      </nav>
+      
+      <!-- CTA Button (Desktop) -->
+      <div class="hidden md:flex items-center space-x-4">
+        <button class="btn-outline-gradient group" 
+                data-contact-modal
+                aria-label="무료 상담 신청">
+          <span>무료 상담</span>
+          <span data-icon="arrow-right" 
+                class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"></span>
+        </button>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+              data-mobile-menu-toggle
+              aria-expanded="false"
+              aria-controls="mobile-menu"
+              aria-label="메뉴 열기">
+        <span data-icon="menu" class="w-6 h-6 text-gray-900" data-menu-icon="open"></span>
+        <span data-icon="x" class="w-6 h-6 text-gray-900 hidden" data-menu-icon="close"></span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div class="md:hidden bg-white border-t border-gray-200 hidden" 
+       data-mobile-menu
+       id="mobile-menu">
+    <div class="container-custom py-4">
+      
+      <!-- Mobile Navigation Links -->
+      <nav class="space-y-1 mb-6" role="navigation" aria-label="모바일 메뉴">
+        <a href="/" 
+           class="nav-link-mobile" 
+           data-nav-link="home">
+          <span data-icon="home" class="w-5 h-5"></span>
+          Home
+        </a>
+        
+        <a href="/about.html" 
+           class="nav-link-mobile" 
+           data-nav-link="about">
+          <span data-icon="users" class="w-5 h-5"></span>
+          About
+        </a>
+        
+        <a href="/business.html" 
+           class="nav-link-mobile" 
+           data-nav-link="business">
+          <span data-icon="briefcase" class="w-5 h-5"></span>
+          Business
+        </a>
+        
+        <a href="/news.html" 
+           class="nav-link-mobile" 
+           data-nav-link="news">
+          <span data-icon="newspaper" class="w-5 h-5"></span>
+          News
+        </a>
+        
+        <a href="/contact.html" 
+           class="nav-link-mobile" 
+           data-nav-link="contact">
+          <span data-icon="mail" class="w-5 h-5"></span>
+          Contact
+        </a>
+      </nav>
+      
+      <!-- Mobile CTA Button -->
+      <div class="border-t border-gray-200 pt-4">
+        <button class="btn-gradient w-full justify-center" 
+                data-contact-modal>
+          <span>무료 상담 신청</span>
+          <span data-icon="arrow-right" class="ml-2 w-4 h-4"></span>
+        </button>
+      </div>
+      
+      <!-- Mobile Contact Info -->
+      <div class="border-t border-gray-200 pt-4 mt-4 space-y-3">
+        <div class="flex items-center space-x-3 text-gray-600">
+          <span data-icon="phone" class="w-4 h-4"></span>
+          <span class="text-sm">1588-0000</span>
+        </div>
+        <div class="flex items-center space-x-3 text-gray-600">
+          <span data-icon="mail" class="w-4 h-4"></span>
+          <span class="text-sm">contact@potensiainc.com</span>
+        </div>
+      </div>
+      
+      <!-- Social Links -->
+      <div class="border-t border-gray-200 pt-4 mt-4">
+        <div class="flex space-x-4">
+          <a href="#" 
+             class="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+             aria-label="LinkedIn">
+            <span data-icon="linkedin" class="w-5 h-5"></span>
+          </a>
+          <a href="#" 
+             class="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+             aria-label="Twitter">
+            <span data-icon="twitter" class="w-5 h-5"></span>
+          </a>
+          <a href="#" 
+             class="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+             aria-label="Facebook">
+            <span data-icon="facebook" class="w-5 h-5"></span>
+          </a>
+          <a href="#" 
+             class="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+             aria-label="YouTube">
+            <span data-icon="youtube" class="w-5 h-5"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Skip Navigation Link (Accessibility) -->
+<a href="#main-content" 
+   class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded z-50"
+   data-skip-link>
+  메인 콘텐츠로 건너뛰기
+</a>
+
+<!-- Header Enhancement Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const header = document.querySelector('[data-header]');
+  const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+  const mobileMenu = document.querySelector('[data-mobile-menu]');
+  const navLinks = document.querySelectorAll('[data-nav-link]');
+  
+  // Set active navigation link based on current page
+  const currentPage = window.location.pathname;
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage || 
+        (currentPage === '/' && href === '/') ||
+        (currentPage.includes(href.replace('.html', '')) && href !== '/')) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+  
+  // Mobile menu toggle functionality
+  if (mobileMenuToggle && mobileMenu) {
+    mobileMenuToggle.addEventListener('click', function() {
+      const isOpen = mobileMenu.classList.contains('block') || !mobileMenu.classList.contains('hidden');
+      
+      if (isOpen) {
+        // Close menu
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('block');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        
+        // Toggle icons
+        mobileMenuToggle.querySelector('[data-menu-icon="open"]').classList.remove('hidden');
+        mobileMenuToggle.querySelector('[data-menu-icon="close"]').classList.add('hidden');
+      } else {
+        // Open menu
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('block');
+        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+        
+        // Toggle icons
+        mobileMenuToggle.querySelector('[data-menu-icon="open"]').classList.add('hidden');
+        mobileMenuToggle.querySelector('[data-menu-icon="close"]').classList.remove('hidden');
+      }
+    });
+    
+    // Close mobile menu when clicking nav links
+    const mobileNavLinks = mobileMenu.querySelectorAll('[data-nav-link]');
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('block');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        
+        // Reset icons
+        mobileMenuToggle.querySelector('[data-menu-icon="open"]').classList.remove('hidden');
+        mobileMenuToggle.querySelector('[data-menu-icon="close"]').classList.add('hidden');
+      });
+    });
+  }
+  
+  // Close mobile menu on window resize
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 768 && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+      mobileMenu.classList.add('hidden');
+      mobileMenu.classList.remove('block');
+      mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      
+      // Reset icons
+      mobileMenuToggle.querySelector('[data-menu-icon="open"]').classList.remove('hidden');
+      mobileMenuToggle.querySelector('[data-menu-icon="close"]').classList.add('hidden');
+    }
+  });
+  
+  // Header scroll effect
+  let lastScrollY = window.scrollY;
+  
+  function updateHeader() {
+    const currentScrollY = window.scrollY;
+    
+    if (currentScrollY > 50) {
+      header.classList.add('scrolled');
+      header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+      header.style.backdropFilter = 'blur(10px)';
+      header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+    } else {
+      header.classList.remove('scrolled');
+      header.style.backgroundColor = '';
+      header.style.backdropFilter = '';
+      header.style.boxShadow = '';
+    }
+    
+    lastScrollY = currentScrollY;
+  }
+  
+  // Throttled scroll listener
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        updateHeader();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+  
+  // Initialize header state
+  updateHeader();
+});
+</script>
+
+<!-- Additional Header Styles -->
+<style>
+/* Header specific styles */
+.header {
+  transition: all 0.3s ease;
+}
+
+.header.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header.scrolled .nav-link-modern {
+  color: #1f2937;
+}
+
+.header.scrolled .nav-link-modern:hover {
+  color: #2563eb;
+}
+
+/* Active navigation link */
+.nav-link-modern.active {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.nav-link-modern.active span {
+  width: 100%;
+}
+
+/* Mobile menu animation */
+.mobile-menu-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.mobile-menu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.mobile-menu-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Logo hover effect */
+.logo-hover:hover .logo-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Navigation underline animation */
+.nav-link-modern span {
+  transition: width 0.3s ease;
+}
+
+/* Mobile navigation item animation */
+.nav-link-mobile {
+  transition: all 0.2s ease;
+}
+
+.nav-link-mobile:hover {
+  background-color: rgba(37, 99, 235, 0.1);
+  border-radius: 0.5rem;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .nav-link-modern span,
+  .nav-link-mobile,
+  .mobile-menu-enter-active,
+  .mobile-menu-exit-active {
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .header {
+    border-bottom: 2px solid #000;
+  }
+  
+  .nav-link-modern:hover {
+    background-color: #000;
+    color: #fff;
+  }
+}
+
+/* Focus indicators */
+.nav-link-modern:focus,
+.nav-link-mobile:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Dark mode support (future enhancement) */
+@media (prefers-color-scheme: dark) {
+  .header.scrolled {
+    background-color: rgba(31, 41, 55, 0.95);
+  }
+  
+  .header.scrolled .nav-link-modern {
+    color: #f9fafb;
+  }
+}
+</style>

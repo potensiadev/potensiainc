@@ -1,0 +1,7 @@
+// package.json (React 예시)
+{
+  "scripts": {
+    "build": "react-scripts build",
+    "start": "react-scripts start"
+  }
+}
