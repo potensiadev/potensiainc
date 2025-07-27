@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Potensia Inc. - 디지털 혁신을 선도하는 기업</title>
+    <title>Potensia Inc.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Flexbox layout for footer positioning */
@@ -76,6 +76,95 @@
             width: 100%;
         }
 
+        /* Enhanced mobile menu */
+        .mobile-menu-backdrop {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 64, 175, 0.95) 50%, rgba(88, 28, 135, 0.98) 100%);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .mobile-menu-item {
+            position: relative;
+            padding: 18px 24px;
+            margin: 6px 16px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: white;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(15px);
+            overflow: hidden;
+        }
+
+        .mobile-menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #60a5fa, #a78bfa, #f472b6);
+            border-radius: 0 8px 8px 0;
+            transform: scaleY(0);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .mobile-menu-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .mobile-menu-item:hover::after {
+            left: 100%;
+        }
+
+        .mobile-menu-item:hover {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(147, 51, 234, 0.20) 100%);
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateX(12px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .mobile-menu-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .mobile-menu-item svg {
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-item:hover svg {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        /* Mobile menu slide animation */
+        .mobile-menu-enter {
+            opacity: 0;
+            transform: translateY(-30px) scale(0.95);
+        }
+
+        .mobile-menu-enter-active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Staggered animation for menu items */
+        .mobile-menu-item:nth-child(1) { animation-delay: 0.1s; }
+        .mobile-menu-item:nth-child(2) { animation-delay: 0.15s; }
+        .mobile-menu-item:nth-child(3) { animation-delay: 0.2s; }
+        .mobile-menu-item:nth-child(4) { animation-delay: 0.25s; }
+        .mobile-menu-item:nth-child(5) { animation-delay: 0.3s; }
+
         /* Card hover effects */
         .service-card:hover {
             transform: translateY(-8px);
@@ -141,14 +230,49 @@
                     </div>
                 </div>
 
-                <!-- Mobile Menu -->
-                <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
-                    <div class="px-4 py-2 space-y-1">
-                        <a href="#home" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Home</a>
-                        <a href="#about" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">About</a>
-                        <a href="#business" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Business</a>
-                        <a href="#news" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">News</a>
-                        <a href="#footer" class="block px-3 py-2 text-gray-900 hover:text-blue-600 transition-colors">Contact</a>
+                <!-- Enhanced Mobile Menu -->
+                <div id="mobile-menu" class="md:hidden mobile-menu-backdrop border-t hidden">
+                    <div class="py-4 space-y-2">
+                        <a href="#home" class="mobile-menu-item block transition-all duration-300">
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                </svg>
+                                <span>Home</span>
+                            </div>
+                        </a>
+                        <a href="#about" class="mobile-menu-item block transition-all duration-300">
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>About</span>
+                            </div>
+                        </a>
+                        <a href="#business" class="mobile-menu-item block transition-all duration-300">
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
+                                </svg>
+                                <span>Business</span>
+                            </div>
+                        </a>
+                        <a href="#news" class="mobile-menu-item block transition-all duration-300">
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                                </svg>
+                                <span>News</span>
+                            </div>
+                        </a>
+                        <a href="#footer" class="mobile-menu-item block transition-all duration-300">
+                            <div class="flex items-center space-x-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <span>Contact</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </header>
@@ -457,11 +581,107 @@
 
     <!-- JavaScript -->
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+        // Scroll to top function for logo click
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Enhanced mobile menu animation
+        function initializeMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const isOpen = !mobileMenu.classList.contains('hidden');
+                    
+                    if (isOpen) {
+                        // Close animation with scale effect
+                        const menuItems = mobileMenu.querySelectorAll('.mobile-menu-item');
+                        menuItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.style.transform = 'translateX(-30px) scale(0.95)';
+                                item.style.opacity = '0';
+                            }, index * 50);
+                        });
+                        
+                        setTimeout(() => {
+                            mobileMenu.style.opacity = '0';
+                            mobileMenu.style.transform = 'translateY(-30px) scale(0.95)';
+                        }, 200);
+                        
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                            document.body.style.overflow = '';
+                            // Reset transforms
+                            mobileMenu.style.transform = '';
+                            mobileMenu.style.opacity = '';
+                            menuItems.forEach(item => {
+                                item.style.transform = '';
+                                item.style.opacity = '';
+                            });
+                        }, 500);
+                    } else {
+                        // Open animation with enhanced effects
+                        mobileMenu.classList.remove('hidden');
+                        mobileMenu.style.opacity = '0';
+                        mobileMenu.style.transform = 'translateY(-30px) scale(0.95)';
+                        
+                        requestAnimationFrame(() => {
+                            mobileMenu.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                            mobileMenu.style.opacity = '1';
+                            mobileMenu.style.transform = 'translateY(0) scale(1)';
+                            document.body.style.overflow = 'hidden';
+                        });
+
+                        // Staggered menu items animation
+                        const menuItems = mobileMenu.querySelectorAll('.mobile-menu-item');
+                        menuItems.forEach((item, index) => {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateX(-30px) scale(0.95)';
+                            setTimeout(() => {
+                                item.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateX(0) scale(1)';
+                            }, index * 100 + 300);
+                        });
+                    }
+                });
+
+                // Enhanced close menu when clicking on a link
+                const menuLinks = mobileMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        const menuItems = mobileMenu.querySelectorAll('.mobile-menu-item');
+                        menuItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.style.transform = 'translateX(-30px) scale(0.95)';
+                                item.style.opacity = '0';
+                            }, index * 50);
+                        });
+                        
+                        setTimeout(() => {
+                            mobileMenu.style.opacity = '0';
+                            mobileMenu.style.transform = 'translateY(-30px) scale(0.95)';
+                        }, 200);
+                        
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                            document.body.style.overflow = '';
+                            mobileMenu.style.transform = '';
+                            mobileMenu.style.opacity = '';
+                            menuItems.forEach(item => {
+                                item.style.transform = '';
+                                item.style.opacity = '';
+                            });
+                        }, 500);
+                    });
+                });
+            }
+        }
 
         // Header scroll effect
         window.addEventListener('scroll', function() {
@@ -483,7 +703,7 @@
             }
         });
 
-        // Smooth scrolling for anchor links (already handled by CSS scroll-behavior)
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -513,7 +733,7 @@
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                const href = link.getAttribute('href').substring(1); // Remove # from href
+                const href = link.getAttribute('href').substring(1);
                 if (href === current) {
                     link.classList.add('active');
                 }
@@ -533,6 +753,11 @@
                 }
             });
         }, observerOptions);
+
+        // Initialize all interactions when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMobileMenu();
+        });
 
         // Observe service cards and other elements
         document.querySelectorAll('.service-card, .stat-counter, article').forEach(el => {
