@@ -774,7 +774,59 @@
   .animate-floatSlow,
   .animate-bounce,
   .animate-pulse,
-  .animate-pulseSlow {
+  .animate-pulseSlow,
+  .animate-gradientShift,
+  .animate-morphShape {
     animation: none;
   }
+}
+
+/* ==========================================================================
+   SECURITY ENHANCEMENTS
+   ========================================================================== */
+
+/* Prevent hover jacking on mobile */
+@media (hover: none) {
+  .hover-lift:hover,
+  .hover-scale:hover,
+  .hover-rotate:hover,
+  .hover-tilt:hover,
+  .hover-glow:hover,
+  .hover-gradient-shift:hover,
+  .hover-blur:hover,
+  .hover-brightness:hover,
+  .hover-saturate:hover {
+    transform: none;
+    filter: none;
+    box-shadow: none;
+    background-position: initial;
+  }
+}
+
+/* Performance: Limit concurrent animations */
+.animation-limit {
+  animation-fill-mode: both;
+  animation-play-state: paused;
+}
+
+.animation-limit.active {
+  animation-play-state: running;
+}
+
+/* Security: Safe z-index for animated elements */
+.safe-animated {
+  z-index: 1;
+  position: relative;
+}
+
+.safe-animated:hover {
+  z-index: 2;
+}
+
+/* Accessibility: Focus indicators for animated elements */
+.animate-fadeIn:focus,
+.animate-scaleIn:focus,
+.hover-lift:focus {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
 }

@@ -1,0 +1,400 @@
+/* ==========================================================================
+   POTENSIA INC. - SECURITY STYLESHEET
+   Security-focused CSS rules and defensive styling
+   ========================================================================== */
+
+/* ==========================================================================
+   CLICKJACKING PROTECTION
+   ========================================================================== */
+
+/* Secure form elements */
+.secure-form {
+  position: relative;
+  z-index: var(--z-modal);
+  background: var(--color-white);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-xl);
+}
+
+.secure-form::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: transparent;
+  border: 1px dashed var(--color-primary);
+  border-radius: var(--radius-xl);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Secure buttons */
+.secure-btn {
+  position: relative;
+  z-index: var(--z-popover);
+  min-height: 44px; /* Touch target minimum */
+  min-width: 44px;
+  padding: 12px 24px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+.secure-btn:focus {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  border-color: var(--color-primary);
+}
+
+.secure-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: inherit;
+}
+
+/* ==========================================================================
+   VISUAL SPOOFING PROTECTION
+   ========================================================================== */
+
+/* Authenticated area indicator */
+.authenticated-zone {
+  position: relative;
+  background: linear-gradient(45deg, transparent 40%, rgba(37, 99, 235, 0.05) 50%, transparent 60%);
+  border-left: 4px solid var(--color-primary);
+}
+
+.authenticated-zone::before {
+  content: '🔒 Secure Area';
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  background: var(--color-primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 1;
+}
+
+/* Critical action confirmation */
+.critical-action {
+  background: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%);
+  border: 2px solid #dc2626;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  position: relative;
+}
+
+.critical-action::before {
+  content: '⚠️ Important Action';
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: #dc2626;
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   HIGH CONTRAST & ACCESSIBILITY
+   ========================================================================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .btn,
+  .card,
+  .form-input {
+    border-width: 2px;
+    border-style: solid;
+  }
+  
+  .glass {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: none;
+  }
+  
+  .header.scrolled {
+    background: rgba(255, 255, 255, 1);
+    backdrop-filter: none;
+  }
+}
+
+/* Color blind friendly indicators */
+.status-success {
+  background: #10b981;
+  color: white;
+  position: relative;
+}
+
+.status-success::before {
+  content: '✓';
+  margin-right: 8px;
+}
+
+.status-warning {
+  background: #f59e0b;
+  color: white;
+  position: relative;
+}
+
+.status-warning::before {
+  content: '⚠';
+  margin-right: 8px;
+}
+
+.status-error {
+  background: #ef4444;
+  color: white;
+  position: relative;
+}
+
+.status-error::before {
+  content: '✗';
+  margin-right: 8px;
+}
+
+/* ==========================================================================
+   INPUT VALIDATION & SECURITY
+   ========================================================================== */
+
+/* Secure input styling */
+.secure-input {
+  border: 2px solid var(--color-gray-300);
+  background: var(--color-white);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', roboto, sans-serif;
+  transition: all 0.2s ease;
+}
+
+.secure-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+.secure-input.invalid {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.secure-input.valid {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+/* Password field security indicators */
+.password-field {
+  position: relative;
+}
+
+.password-strength {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #dc2626;
+}
+
+.password-strength.medium {
+  background: #f59e0b;
+}
+
+.password-strength.strong {
+  background: #10b981;
+}
+
+/* ==========================================================================
+   MODAL & OVERLAY SECURITY
+   ========================================================================== */
+
+/* Secure modal backdrop */
+.secure-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secure-modal {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 3px solid var(--color-primary);
+  position: relative;
+  z-index: var(--z-modal);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.secure-modal::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+  border-radius: calc(var(--radius-xl) + 6px);
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* ==========================================================================
+   PERFORMANCE & SECURITY OPTIMIZATIONS
+   ========================================================================== */
+
+/* Prevent layout thrashing */
+.layout-stable {
+  contain: layout;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Secure image loading */
+.secure-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  background: var(--color-gray-200);
+  position: relative;
+}
+
+.secure-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 49%, rgba(0,0,0,0.1) 50%, transparent 51%);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   ANTI-AUTOMATION PROTECTION
+   ========================================================================== */
+
+/* Rate limiting visual feedback */
+.rate-limited {
+  opacity: 0.5;
+  pointer-events: none;
+  position: relative;
+}
+
+.rate-limited::after {
+  content: 'Please wait...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   BROWSER SECURITY HEADERS SUPPORT
+   ========================================================================== */
+
+/* Content Security Policy friendly styles */
+.csp-safe {
+  /* Avoid inline styles, use classes instead */
+  background-image: none;
+  content: none;
+}
+
+/* Frame busting support */
+.no-frame {
+  position: relative;
+}
+
+.no-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 0, 0, 0.1) 10px,
+    rgba(255, 0, 0, 0.1) 20px
+  );
+  pointer-events: none;
+  z-index: 999999;
+  display: none;
+}
+
+/* Show frame warning when in iframe */
+body.in-frame .no-frame::before {
+  display: block;
+}
+
+/* ==========================================================================
+   RESPONSIVE SECURITY
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .secure-btn {
+    min-height: 48px; /* Larger touch targets on mobile */
+    min-width: 48px;
+  }
+  
+  .secure-modal {
+    margin: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  .secure-form {
+    padding: 1.5rem;
+    margin: 0.5rem;
+  }
+}
+
+/* ==========================================================================
+   PRINT SECURITY
+   ========================================================================== */
+
+@media print {
+  .secure-form,
+  .critical-action,
+  .authenticated-zone {
+    border: 2px solid #000 !important;
+    background: #fff !important;
+  }
+  
+  .secure-form::before,
+  .critical-action::before,
+  .authenticated-zone::before {
+    color: #000 !important;
+    background: #fff !important;
+    border: 1px solid #000 !important;
+  }
+  
+  /* Hide sensitive information in print */
+  .no-print {
+    display: none !important;
+  }
+}
